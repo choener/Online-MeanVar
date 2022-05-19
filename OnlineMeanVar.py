@@ -1,7 +1,21 @@
 
 import numpy as np;
 
+
 class LocShift:
+    """
+    Provides an online-algorithm to calculate mean and variance. You have an array, accessible by
+    sub-arrays of different sizes only and wish to calculate the mean and variance of the array.
+    Initialize this object via
+    mv = LocShift()
+    repeatedly append data, where xs are the sub-arrays
+    mv.append(xs)
+    finally return mean and variance
+    mean, var = mv.meanVar()
+
+    The first sub-array is used to calculate the internal shift value to stabilize the numerical
+    calculations.
+    """
     # If initlen is set >0, we collect this many objects before calculating @K@.
     def __init__(self, initlen=1):
         self.initvec = np.zeros(0)
@@ -16,8 +30,9 @@ class LocShift:
             self.initvec = xs;
         else:
             self.initvec = np.append(self.initvec, xs);
-        # minimal length reached, lets do things
-        if self.initvec.size > self.initlen:
+        # Minimal length reached, or calculation has begun: flush to calculate and not retain the
+        # vector.
+        if self.initvec.size > self.initlen or self.n > 0:
             self.flush()
     # flush the @initvec@ and compute the moments
     def flush(self):

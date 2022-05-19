@@ -1,6 +1,5 @@
 
 import numpy as np;
-import pytest as test;
 
 import OnlineMeanVar as omv
 
