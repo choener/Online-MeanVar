@@ -21,7 +21,7 @@ def test_LocShift():
     kmean, kvar = ls.meanVar()
     meankmean = math.log(mean) - math.log(kmean)
     varkvar = math.log(var) - math.log(kvar)
-    print("mean: {}, var: {}, k-mean: {}, k-var: {}, loc (first 10): {}, mean/kmean: {}, var/kvar: {}".format(mean, var, kmean, kvar, d, meankmean, varkvar))
+    print("mean: {}, var: {}, k-mean: {}, k-var: {}, loc (first 10): {}, K {}, mean/kmean: {}, var/kvar: {}".format(mean, var, kmean, kvar, d, ls.k, meankmean, varkvar))
     assert (meankmean < 0.01)
     assert (varkvar < 0.1)
 
